@@ -10,6 +10,7 @@ const contactContent =
 	'Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.';
 
 const app = express();
+const posts = [];
 
 app.set('view engine', 'ejs');
 
@@ -21,5 +22,41 @@ app.listen(3000, function () {
 });
 
 app.get('/', function (req, res) {
-	res.render('home', { pageTitle: 'Home', pageParagraph: homeStartingContent });
+	console.log(posts.title);
+	res.render('home', {
+		pageTitle: 'Home',
+		pageParagraph: homeStartingContent,
+		postTitle: posts.title,
+		postBody: posts.content,
+	});
+});
+
+app.get('/about', function (req, res) {
+	res.render('about', {
+		pageTitle: 'About',
+		pageParagraph: aboutContent,
+	});
+});
+
+app.get('/contact', function (req, res) {
+	res.render('contact', {
+		pageTitle: 'Contact',
+		pageParagraph: contactContent,
+	});
+});
+
+app.get('/compose', function (req, res) {
+	res.render('compose', {
+		pageTitle: 'Compose',
+	});
+});
+
+app.post('/compose', function (req, res) {
+	const post = {
+		title: req.body.postTitle,
+		content: req.body.postBody,
+	};
+	posts.push(post);
+
+	res.redirect('/');
 });

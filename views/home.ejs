@@ -1,6 +1,10 @@
-<%- include("header") -%>
+<%- include("partials/header") -%>
 
 <h1><%=pageTitle%></h1>
 <p><%=pageParagraph%></p>
 
-<%- include("footer") -%>
+<% for(let item of postTitle){ %>
+  <h2><%= item %></h2>
+<% } %>
+
+<%- include("partials/footer") -%>
