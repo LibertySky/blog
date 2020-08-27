@@ -3,8 +3,9 @@
 <h1><%=pageTitle%></h1>
 <p><%=pageParagraph%></p>
 
-<% for(let item of postTitle){ %>
-  <h2><%= item %></h2>
+<% for(let post of posts){ %>
+<h1><%= post.title %></h1>
+<p><%= post.content %></p>
 <% } %>
 
 <%- include("partials/footer") -%>
